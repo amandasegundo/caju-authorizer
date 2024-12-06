@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "caju-authorizer-api", "caju-authorizer\caju-authorizer-api.csproj", "{873EA1F0-85A7-4D69-8C8F-A224496F1CE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "caju-authorizer-domain", "caju-authorizer-domain\caju-authorizer-domain.csproj", "{6435CE2E-9680-4121-AD7A-5C8FA0573DED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "caju-authorizer-infra.ioc", "caju-authorizer-infra.ioc\caju-authorizer-infra.ioc.csproj", "{72694AB5-A8D7-4EEA-86BA-04B988647A5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "caju-authorizer-infra.data", "caju-authorizer-infra.data\caju-authorizer-infra.data.csproj", "{1F160180-9D23-40FD-ADE3-9A5B11E5FC23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{873EA1F0-85A7-4D69-8C8F-A224496F1CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{873EA1F0-85A7-4D69-8C8F-A224496F1CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{873EA1F0-85A7-4D69-8C8F-A224496F1CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{873EA1F0-85A7-4D69-8C8F-A224496F1CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6435CE2E-9680-4121-AD7A-5C8FA0573DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6435CE2E-9680-4121-AD7A-5C8FA0573DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6435CE2E-9680-4121-AD7A-5C8FA0573DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6435CE2E-9680-4121-AD7A-5C8FA0573DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72694AB5-A8D7-4EEA-86BA-04B988647A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72694AB5-A8D7-4EEA-86BA-04B988647A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72694AB5-A8D7-4EEA-86BA-04B988647A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72694AB5-A8D7-4EEA-86BA-04B988647A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F160180-9D23-40FD-ADE3-9A5B11E5FC23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F160180-9D23-40FD-ADE3-9A5B11E5FC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F160180-9D23-40FD-ADE3-9A5B11E5FC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F160180-9D23-40FD-ADE3-9A5B11E5FC23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
