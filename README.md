@@ -2,7 +2,7 @@
 
 ## Sobre
 
-A aplicação caju-authorizer é uma API REST que processa transações onde são verificadas regras de negócio e atualizaão dos saldos em banco de dados para chegar na conclusão se uma transação é aprovada ou não.
+A aplicação caju-authorizer é uma API REST que processa transações onde são verificadas regras de negócio e atualização dos saldos em banco de dados para chegar na conclusão se uma transação é aprovada ou não.
 
 Foi utilizada a linguagem C# com o Framework .NET 8.0 que são tecnologias que a desenvolvedora mais tem contato atualmente.
 
