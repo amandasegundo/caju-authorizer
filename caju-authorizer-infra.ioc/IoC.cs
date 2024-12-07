@@ -19,6 +19,7 @@ namespace caju_authorizer_infra.ioc
 
       // Services
       services.AddScoped<IAuthorizerService, AuthorizerService>();
+      services.AddScoped<IAccountService, AccountService>();
 
       // DataBases
       services.AddDbContext<CajuDbContext>(options => options.UseInMemoryDatabase("Caju"));

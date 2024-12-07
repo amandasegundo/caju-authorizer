@@ -16,7 +16,7 @@ namespace caju_authorizer_domain.Authorizer.Handlers
 
       if (!HasSufficientBalance(account.FoodBalance, authorizerRequest.TotalAmount))
       {
-        return ResponseCodes.Rejected.GetDescription();
+        return Fallback(account);
       }
 
       var newBalance = CalculateNewBalance(account.FoodBalance, authorizerRequest.TotalAmount);
@@ -24,6 +24,22 @@ namespace caju_authorizer_domain.Authorizer.Handlers
       accountRepository.UpdateAccount(authorizerRequest.Account, account);
 
       return ResponseCodes.Approved.GetDescription();
+    }
+
+    public string Fallback(Account account)
+    {
+      var rest = Math.Abs(CalculateNewBalance(account.FoodBalance, authorizerRequest.TotalAmount));
+
+      if(HasSufficientBalance(account.CashBalance, rest))
+      {
+        var newCashBalance = CalculateNewBalance(account.CashBalance, rest);
+        account.CashBalance = newCashBalance;
+        account.FoodBalance = 0;
+        accountRepository.UpdateAccount(authorizerRequest.Account, account);
+        return ResponseCodes.Approved.GetDescription();
+      }
+
+      return ResponseCodes.Rejected.GetDescription();
     }
   }
 }
