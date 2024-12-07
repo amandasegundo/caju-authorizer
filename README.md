@@ -35,7 +35,7 @@ A solução também possui a arquitetura MVC (Model-View-Controller), tendo o Sw
 
 ### Banco de dados
 
-Foi utilizado o banco de dados em memória Microsoft.EntityFrameworkCore.InMemory, contendo as entidades Accounts e Merchants.
+Foi utilizado o banco de dados em memória Microsoft.EntityFrameworkCore.InMemory, contendo as entidades Account e Merchant.
 
 ![caju-database.png](docs/caju-database.png)
 
