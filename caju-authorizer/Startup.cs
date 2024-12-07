@@ -5,14 +5,14 @@ using caju_authorizer_infra.ioc;
 
 namespace caju_authorizer_api
 {
-  public class Startup
+  public class Startup(IConfiguration configuration)
   {
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllers();
       services.AddSwaggerGen();
 
-      IoC.Configure(services);
+      IoC.Configure(services, configuration);
 
       services.AddControllers(options =>
       {

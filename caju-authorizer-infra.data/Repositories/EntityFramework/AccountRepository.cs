@@ -3,9 +3,9 @@ using caju_authorizer_domain.Authorizer.Repositories;
 using caju_authorizer_infra.data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace caju_authorizer_infra.data.Repositories
+namespace caju_authorizer_infra.data.Repositories.EntityFramework
 {
-  public class AccountRepository: IAccountRepository
+  public class AccountRepository : IAccountRepository
   {
     public CajuDbContext _context;
 
