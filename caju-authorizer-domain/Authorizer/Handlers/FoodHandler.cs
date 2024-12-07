@@ -8,12 +8,11 @@ namespace caju_authorizer_domain.Authorizer.Handlers
 {
   public class FoodHandler(
     AuthorizerRequest authorizerRequest,
+    Account account,
     IAccountRepository accountRepository) : AuthorizerHandler
   {
     public override string Handle()
     {
-      var account = accountRepository.GetAccount(authorizerRequest.Account);
-
       if (!HasSufficientBalance(account.FoodBalance, authorizerRequest.TotalAmount))
       {
         return Fallback(account);

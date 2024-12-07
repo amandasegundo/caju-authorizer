@@ -8,5 +8,6 @@ namespace caju_authorizer_infra.data.Context
     public CajuDbContext(DbContextOptions<CajuDbContext> options) : base(options) { }
 
     public DbSet<Account> Accounts { get; set; }
+    public DbSet<Merchant> Merchants { get; set; }
   }
 }

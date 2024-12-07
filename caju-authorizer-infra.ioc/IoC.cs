@@ -26,6 +26,7 @@ namespace caju_authorizer_infra.ioc
 
       // Repositories
       services.AddScoped<IAccountRepository, AccountRepository>();
+      services.AddScoped<IMerchantRepository, MerchantRepository>();
     }
   }
 }

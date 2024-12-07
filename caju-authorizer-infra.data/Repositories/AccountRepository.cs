@@ -13,7 +13,7 @@ namespace caju_authorizer_infra.data.Repositories
     {
       _context = context;
     }
-    public Account GetAccount(string id) => _context.Accounts.Find(id);
+    public Account GetAccount(string id) => _context.Accounts.FirstOrDefault(e => e.Id == id);
 
     public IEnumerable<Account> GetAccounts() => _context.Accounts;
 

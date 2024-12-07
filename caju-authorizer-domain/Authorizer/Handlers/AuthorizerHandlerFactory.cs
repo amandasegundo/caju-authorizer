@@ -10,11 +10,18 @@ namespace caju_authorizer_domain.Authorizer.Handlers
   {
     public AuthorizerHandler Create(AuthorizerRequest authorizerRequest)
     {
+      var account = accountRepository.GetAccount(authorizerRequest.Account);
+
+      if (account is null)
+      {
+        throw new InvalidOperationException("Conta não encontrada no banco de dados");
+      }
+
       return authorizerRequest.MCC switch
       {
-        "5411" or "5412" => new FoodHandler(authorizerRequest, accountRepository),
-        "5811" or "5812" => new MealHandler(authorizerRequest, accountRepository),
-        _ => new CashHandler(authorizerRequest, accountRepository),
+        "5411" or "5412" => new FoodHandler(authorizerRequest, account, accountRepository),
+        "5811" or "5812" => new MealHandler(authorizerRequest, account, accountRepository),
+        _ => new CashHandler(authorizerRequest, account, accountRepository),
       };
     }
   }

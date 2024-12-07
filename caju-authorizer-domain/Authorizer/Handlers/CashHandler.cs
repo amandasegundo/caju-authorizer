@@ -1,5 +1,6 @@
 ﻿using caju_authorizer_domain.Abstractions.Extensions;
 using caju_authorizer_domain.Authorizer.Dtos;
+using caju_authorizer_domain.Authorizer.Entities;
 using caju_authorizer_domain.Authorizer.Enums;
 using caju_authorizer_domain.Authorizer.Repositories;
 
@@ -7,12 +8,11 @@ namespace caju_authorizer_domain.Authorizer.Handlers
 {
   public class CashHandler(
     AuthorizerRequest authorizerRequest,
+    Account account,
     IAccountRepository accountRepository) : AuthorizerHandler
   {
     public override string Handle()
     {
-      var account = accountRepository.GetAccount(authorizerRequest.Account);
-
       if (!HasSufficientBalance(account.CashBalance, authorizerRequest.TotalAmount))
       {
         return ResponseCodes.Rejected.GetDescription();

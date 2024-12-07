@@ -1,9 +1,7 @@
 ﻿using caju_authorizer.Filters;
-using caju_authorizer_domain.Authorizer.Entities;
 using caju_authorizer_infra.data.Context;
+using caju_authorizer_infra.data.Data;
 using caju_authorizer_infra.ioc;
-using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace caju_authorizer_api
 {
@@ -30,7 +28,7 @@ namespace caju_authorizer_api
         app.UseDeveloperExceptionPage();
       }
 
-      DataBaseIngestion(context);
+      InitDataBase.Init(context);
 
       app.UseRouting();
 
@@ -38,15 +36,6 @@ namespace caju_authorizer_api
       {
         endpoints.MapControllers();
       });
-    }
-
-    public void DataBaseIngestion(CajuDbContext context)
-    {
-      context.Accounts.Add(new Account { Id = "101", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
-      context.Accounts.Add(new Account { Id = "102", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
-      context.Accounts.Add(new Account { Id = "103", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
-      context.Accounts.Add(new Account { Id = "104", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
-      context.SaveChanges();
     }
   }
 }
