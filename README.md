@@ -8,7 +8,7 @@ Foi utilizada a linguagem C# com o Framework .NET 8.0 que são tecnologias que a
 
 ### Funcionalidades
 
-- **L1. Autorizador Simples**: Usa a MCC (Merchant Category Code) para mapear a categoria de benefícios  (FOOD e MEAL) da transaão, usa a categoria CASH caso não reconheça o MCC, por final, aprova ou rejeita a transação baseando-se no saldo.
+- **L1. Autorizador Simples**: Usa a MCC (Merchant Category Code) para mapear a categoria de benefícios  (FOOD e MEAL) da transação, usa a categoria CASH caso não reconheça o MCC, por final, aprova ou rejeita a transação baseando-se no saldo.
 - **L2. Autorizador com fallback**: Se a MCC não puder ser mapeada para uma categoria de benefícios ou se o saldo da categoria fornecida não for suficiente para pagar a transação inteira, verifica o saldo de CASH e, se for suficiente, debita esse saldo.
 - **L3. Dependente do comerciante**: Substitui o MCC com base no nome do comerciante.
 - **L4. Transações simultâneas**: Se uma transação for repetida dentro de um minuto (parametrizável), esta transação não é processada.
