@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace caju_authorizer_domain.Authorizer.Dtos
 {
+  [ExcludeFromCodeCoverage]
   public class AuthorizerResponse
   {
     [JsonProperty("code")]

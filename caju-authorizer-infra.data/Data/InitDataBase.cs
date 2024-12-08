@@ -11,7 +11,6 @@ namespace caju_authorizer_infra.data.Data
       context.Accounts.Add(new Account { Id = "101", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
       context.Accounts.Add(new Account { Id = "102", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
       context.Accounts.Add(new Account { Id = "103", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
-      context.Accounts.Add(new Account { Id = "104", FoodBalance = 1000, MealBalance = 1000, CashBalance = 1000 });
 
       // Merchants
       context.Merchants.Add(new Merchant { Id = "101", Name = "PADARIA DO ZE SAO PAULO BR", MCC = "5411" });

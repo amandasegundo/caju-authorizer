@@ -15,7 +15,7 @@ namespace caju_authorizer_domain.Authorizer.Handlers
     {
       if (!HasSufficientBalance(account.MealBalance, authorizerRequest.TotalAmount))
       {
-        return ResponseCodes.Rejected.GetDescription();
+        return Fallback(account);
       }
 
       var newBalance = CalculateNewBalance(account.MealBalance, authorizerRequest.TotalAmount);

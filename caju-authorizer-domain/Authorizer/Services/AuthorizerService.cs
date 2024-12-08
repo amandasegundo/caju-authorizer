@@ -7,7 +7,6 @@ using caju_authorizer_domain.Authorizer.Helpers;
 using caju_authorizer_domain.Authorizer.Repositories;
 using caju_authorizer_domain.Authorizer.Services.Interfaces;
 using Newtonsoft.Json;
-using System.Text.Json.Nodes;
 
 namespace caju_authorizer_domain.Authorizer.Services
 {

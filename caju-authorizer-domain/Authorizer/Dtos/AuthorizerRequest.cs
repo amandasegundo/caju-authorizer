@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace caju_authorizer_domain.Authorizer.Dtos
 {
+  [ExcludeFromCodeCoverage]
   public class AuthorizerRequest
   {
     [JsonProperty("account")]

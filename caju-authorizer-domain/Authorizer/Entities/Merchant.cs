@@ -1,5 +1,8 @@
-﻿namespace caju_authorizer_domain.Authorizer.Entities
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace caju_authorizer_domain.Authorizer.Entities
 {
+  [ExcludeFromCodeCoverage]
   public class Merchant
   {
     public required string Id { get; set; }
