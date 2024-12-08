@@ -6,7 +6,7 @@ A aplicação caju-authorizer é uma API REST que processa transações onde sã
 
 Foi utilizada a linguagem C# com o Framework .NET 8.0 que são tecnologias que a desenvolvedora mais tem contato atualmente.
 
-Este projeto faz parte do processo seletivo da empresa Caju e as especificações estão no neste [link](docs/caju-desafio-especificacoes.pdf).
+Este projeto faz parte do processo seletivo da empresa Caju e as especificações estão neste [link](docs/caju-desafio-especificacoes.pdf).
 
 ### Funcionalidades
 
