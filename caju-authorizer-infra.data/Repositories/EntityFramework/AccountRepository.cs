@@ -15,8 +15,6 @@ namespace caju_authorizer_infra.data.Repositories.EntityFramework
     }
     public Account GetAccount(string id) => _context.Accounts.FirstOrDefault(e => e.Id == id);
 
-    public IEnumerable<Account> GetAccounts() => _context.Accounts;
-
     public void UpdateAccount(string id, Account account)
     {
       if (id != account.Id) throw new InvalidDataException("Diferent Id");

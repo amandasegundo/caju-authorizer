@@ -29,6 +29,7 @@ namespace caju_authorizer_infra.ioc
       // Services
       services.AddScoped<IAuthorizerService, AuthorizerService>();
       services.AddScoped<IAccountService, AccountService>();
+      services.AddScoped<ITransactionService, TransactionService>();
 
       // DataBases
       services.AddDbContext<CajuDbContext>(options => options.UseInMemoryDatabase("Caju"));
@@ -36,6 +37,7 @@ namespace caju_authorizer_infra.ioc
       // Repositories
       services.AddScoped<IAccountRepository, AccountRepository>();
       services.AddScoped<IMerchantRepository, MerchantRepository>();
+      services.AddScoped<ITransactionRepository, TransactionRepository>();
       services.AddScoped<ICacheRepository, CacheRepository>();
     }
   }

@@ -78,7 +78,7 @@ Para visualizar os endpoints pode-se utilizar o Swagger que fica no caminho http
 
 ## Endpoints
 
-### Transação
+### Autorização da transação
 
 Abaixo está o cURL do endpoint principal para processar a transação.
 
@@ -102,22 +102,20 @@ curl -X POST 'http://localhost:5035/v1/api/Transactions/Authorize' \
 | 200 OK | {"code": "51"} | Rejeitada |
 | 200 OK | {"code": "07"} | Erro |
 
-### Contas
+### Transações de uma conta
 
-Para auxiliar a visualização dos saldos das contas, foi criado dois endpoints para acessar os registros do banco de dados.
+Para visualizar as transações, foi disponibilizado o endpoint abaixo:
 
-#### Visualizar uma conta
+```bash
+http://localhost:5035/v1/api/Transactions/101
+```
 
-É necessário informar o código da conta no final da URL conforme o exemplo abaixo:
+### Conta
+
+Endpoint para a visualização dos saldos de uma conta:
 
 ```bash
 http://localhost:5035/v1/api/Accounts/101
-```
-
-#### Visualizar todas as contas
-
-```bash
-http://localhost:5035/v1/api/Accounts/
 ```
 
 ## Cobertura de testes

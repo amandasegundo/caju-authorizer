@@ -2,8 +2,8 @@
 
 namespace caju_authorizer_domain.Authorizer.Services.Interfaces
 {
-  public interface IAccountService
+  public interface ITransactionService
   {
-    public Account GetAccount(string id);
+    public IEnumerable<Transaction> GetTransactionsByAccountId(string accountId);
   }
 }

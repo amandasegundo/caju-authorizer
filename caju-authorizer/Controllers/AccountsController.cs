@@ -9,15 +9,6 @@ namespace caju_authorizer_api.Controllers
   public class AccountsController : ControllerBase
   {
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<Account>), 200)]
-    public IActionResult GetAll(
-    [FromServices] IAccountService accountService)
-    {
-      var response = accountService.GetAccounts();
-      return Ok(response);
-    }
-
-    [HttpGet]
     [Route("{id}")]
     [ProducesResponseType(typeof(Account), 200)]
     public IActionResult Get(

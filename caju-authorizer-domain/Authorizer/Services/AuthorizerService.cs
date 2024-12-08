@@ -2,9 +2,11 @@
 using caju_authorizer_domain.Authorizer.Config;
 using caju_authorizer_domain.Authorizer.Dtos;
 using caju_authorizer_domain.Authorizer.Enums;
+using caju_authorizer_domain.Authorizer.Factories;
 using caju_authorizer_domain.Authorizer.Handlers.Interfaces;
 using caju_authorizer_domain.Authorizer.Helpers;
 using caju_authorizer_domain.Authorizer.Repositories;
+using caju_authorizer_domain.Authorizer.Resources;
 using caju_authorizer_domain.Authorizer.Services.Interfaces;
 using Newtonsoft.Json;
 
@@ -13,6 +15,7 @@ namespace caju_authorizer_domain.Authorizer.Services
   public class AuthorizerService(
     IAuthorizerHandlerFactory authorizerHandlerFactory,
     IMerchantRepository merchantRepository,
+    ITransactionRepository transactionRepository,
     ICacheRepository cacheRepository,
     TransactionConfig transactionConfig
   ) : IAuthorizerService
@@ -26,11 +29,12 @@ namespace caju_authorizer_domain.Authorizer.Services
 
       if (merchant is null)
       {
-        Console.Error.WriteLine($"O Merchant não foi encontrado na base de dados");
+        Console.Error.WriteLine(AuthorizerResources.MerchantError);
+        SaveBadTransaction(authorizerRequest, AuthorizerResources.MerchantError);
         return ErrorResponse();
       }
 
-      var transaction = new AuthorizerRequest()
+      var newAuthorizerRequest = new AuthorizerRequest()
       {
         Account = authorizerRequest.Account,
         MCC = merchant.MCC,
@@ -38,29 +42,46 @@ namespace caju_authorizer_domain.Authorizer.Services
         TotalAmount = authorizerRequest.TotalAmount,
       };
 
-      var key = TransactionHelper.GetTransactionCacheKey(transaction);
-      var transactionFromCache = cacheRepository.Get(key);
+      var key = TransactionHelper.GetTransactionCacheKey(newAuthorizerRequest);
+      var cacheResponse = cacheRepository.Get(key);
 
-      if (transactionFromCache != null)
+      if (cacheResponse != null)
       {
-        Console.Error.WriteLine($"Transação simultânea detectada, a transação não será processada");
+        Console.Error.WriteLine(AuthorizerResources.DuplicatedError);
+        SaveBadTransaction(newAuthorizerRequest, AuthorizerResources.DuplicatedError);
         return ErrorResponse();
       }
 
-      var responseCode = authorizerHandlerFactory.Create(transaction).Handle();
-      cacheRepository.Set(key, JsonConvert.SerializeObject(transaction), transactionConfig.ExpirationTimeInMinutes);
+      var responseCode = authorizerHandlerFactory.Create(newAuthorizerRequest).Handle();
+      cacheRepository.Set(key, JsonConvert.SerializeObject(newAuthorizerRequest), transactionConfig.ExpirationTimeInMinutes);
+
+      SaveSuccessTransaction(newAuthorizerRequest, responseCode, AuthorizerResources.Success);
 
       Console.Error.WriteLine($"Processamento finalizado");
 
-      return new AuthorizerResponse()
-      {
-        Code = responseCode
-      };
+      return SuccessResponse(responseCode);
+    }
+
+    public void SaveBadTransaction(AuthorizerRequest authorizerRequest, string detail)
+    {
+      var transaction = TransactionFactory.Create(authorizerRequest, ResponseCodes.Error.GetDescription(), detail);
+      transactionRepository.InsertTransaction(transaction);
+    }
+
+    public void SaveSuccessTransaction(AuthorizerRequest authorizerRequest, string status, string detail)
+    {
+      var transaction = TransactionFactory.Create(authorizerRequest, status, detail);
+      transactionRepository.InsertTransaction(transaction);
     }
 
     public AuthorizerResponse ErrorResponse()
     {
       return new AuthorizerResponse() { Code = ResponseCodes.Error.GetDescription() };
+    }
+
+    public AuthorizerResponse SuccessResponse(string code)
+    {
+      return new AuthorizerResponse() { Code = code };
     }
   }
 }

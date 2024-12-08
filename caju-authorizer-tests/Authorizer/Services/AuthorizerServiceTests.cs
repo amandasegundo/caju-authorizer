@@ -14,6 +14,7 @@ using NUnit.Framework;
 using System.Transactions;
 using Assert = NUnit.Framework.Assert;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
+using Transaction = caju_authorizer_domain.Authorizer.Entities.Transaction;
 
 namespace caju_authorizer_tests.Authorizer.Services
 {
@@ -23,6 +24,7 @@ namespace caju_authorizer_tests.Authorizer.Services
     private Fixture _fixture;
     private Mock<IAuthorizerHandlerFactory> _authorizerHandlerFactory;
     private Mock<IMerchantRepository> _merchantRepository;
+    private Mock<ITransactionRepository> _transactionRepository;
     private Mock<ICacheRepository> _cacheRepository;
     private TransactionConfig _transactionConfig;
     private AuthorizerService _authorizerService;
@@ -33,6 +35,7 @@ namespace caju_authorizer_tests.Authorizer.Services
       _fixture = new Fixture();
       _authorizerHandlerFactory = new();
       _merchantRepository = new();
+      _transactionRepository = new();
       _cacheRepository = new();
       _transactionConfig = new TransactionConfig(){
         ExpirationTimeInMinutes = 1
@@ -41,6 +44,7 @@ namespace caju_authorizer_tests.Authorizer.Services
       _authorizerService = new AuthorizerService(
         _authorizerHandlerFactory.Object,
         _merchantRepository.Object,
+        _transactionRepository.Object,
         _cacheRepository.Object,
         _transactionConfig
       );
@@ -61,6 +65,7 @@ namespace caju_authorizer_tests.Authorizer.Services
       Assert.That(result.Code, Is.EqualTo(ResponseCodes.Error.GetDescription()));
 
       _merchantRepository.Verify(c => c.GetMerchantByName(request.Merchant));
+      _transactionRepository.Verify(c => c.InsertTransaction(It.IsAny<Transaction>()));
     }
 
     [Test]
@@ -71,10 +76,10 @@ namespace caju_authorizer_tests.Authorizer.Services
       // Arrange
       var request = _fixture.Create<AuthorizerRequest>();
       var merchant = _fixture.Create<Merchant>();
-      var transaction = JsonConvert.SerializeObject(_fixture.Create<Transaction>());
+      var cacheResponse = JsonConvert.SerializeObject(_fixture.Create<AuthorizerRequest>());
 
       _merchantRepository.Setup(c => c.GetMerchantByName(request.Merchant)).Returns(merchant);
-      _cacheRepository.Setup(c => c.Get(It.IsAny<string>())).Returns(transaction);
+      _cacheRepository.Setup(c => c.Get(It.IsAny<string>())).Returns(cacheResponse);
 
       // Act
       var result = _authorizerService.Authorize(request);
@@ -84,6 +89,7 @@ namespace caju_authorizer_tests.Authorizer.Services
 
       _merchantRepository.Verify(c => c.GetMerchantByName(request.Merchant));
       _cacheRepository.Verify(c => c.Get(It.IsAny<string>()));
+      _transactionRepository.Verify(c => c.InsertTransaction(It.IsAny<Transaction>()));
     }
 
     [Test]
@@ -107,6 +113,7 @@ namespace caju_authorizer_tests.Authorizer.Services
 
       _merchantRepository.Verify(c => c.GetMerchantByName(request.Merchant));
       _cacheRepository.Verify(c => c.Get(It.IsAny<string>()));
+      _transactionRepository.Verify(c => c.InsertTransaction(It.IsAny<Transaction>()));
     }
 
     private class AuthorizerHandlerClassTest : AuthorizerHandler

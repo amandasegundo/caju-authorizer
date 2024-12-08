@@ -26,25 +26,6 @@ namespace caju_authorizer_tests.Authorizer.Services
 
     [Test]
     [Category("Account-Service")]
-    [Description("GetAccounts When Success")]
-    public void GetAccounts_WhenSuccess()
-    {
-      // Arrange
-      var accounts = _fixture.Create<IEnumerable<Account>>();
-
-      _accountRepository.Setup(c => c.GetAccounts()).Returns(accounts);
-
-      // Act
-      var result = _accountService.GetAccounts();
-
-      // Assert
-      Assert.That(result, Is.Not.Null);
-
-      _accountRepository.Verify(c => c.GetAccounts());
-    }
-
-    [Test]
-    [Category("Account-Service")]
     [Description("GetAccount When Success")]
     public void GetAccount_WhenSuccess()
     {
