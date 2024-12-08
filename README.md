@@ -6,6 +6,8 @@ A aplicação caju-authorizer é uma API REST que processa transações onde sã
 
 Foi utilizada a linguagem C# com o Framework .NET 8.0 que são tecnologias que a desenvolvedora mais tem contato atualmente.
 
+Este projeto faz parte do processo seletivo da empresa Caju e as especificações estão no neste [link](docs/caju-desafio-especificacoes.pdf).
+
 ### Funcionalidades
 
 - **L1. Autorizador Simples**: Usa a MCC (Merchant Category Code) para mapear a categoria de benefícios  (FOOD e MEAL) da transação, usa a categoria CASH caso não reconheça o MCC, por final, aprova ou rejeita a transação baseando-se no saldo.
@@ -68,17 +70,17 @@ Na raiz do projeto use comando `dotnet build` para compilar.
 
 ### Execução
 
-Na raiz do projeto use  o comando `dotnet run --project` informando o caminho do projeto`caju-authorizer-api.csproj` , por exemplo: `dotnet run --project C:\dev\caju\caju-authorizer\caju-authorizer\caju-authorizer-api.csproj`    .
+Na raiz do projeto use  o comando `dotnet run --project` informando o caminho do projeto `caju-authorizer-api.csproj` , por exemplo: `dotnet run --project C:\dev\caju\caju-authorizer\caju-authorizer\caju-authorizer-api.csproj`.
 
 ### Swagger
 
-Para visualizar os endpoints pode utilizar o Swagger que fica no caminho http://localhost:5035/swagger/index.html
+Para visualizar os endpoints pode-se utilizar o Swagger que fica no caminho http://localhost:5035/swagger/index.html
 
 ## Endpoints
 
 ### Transação
 
-Abaixo está o cURL do endpoint principal para processar a transação
+Abaixo está o cURL do endpoint principal para processar a transação.
 
 ```bash
 curl -X POST 'http://localhost:5035/v1/api/Transactions/Authorize' \
@@ -96,13 +98,13 @@ curl -X POST 'http://localhost:5035/v1/api/Transactions/Authorize' \
 
 | Status | Conteúdo | Tipo |
 | --- | --- | --- |
-| 200 OK | {"code": "00"} | Aprovado |
+| 200 OK | {"code": "00"} | Aprovada |
 | 200 OK | {"code": "51"} | Rejeitada |
 | 200 OK | {"code": "07"} | Erro |
 
 ### Contas
 
-Para auxiliar a visualização dos saldos das contas, foi criado dois endpoints para acessar os registros do banco de dados:
+Para auxiliar a visualização dos saldos das contas, foi criado dois endpoints para acessar os registros do banco de dados.
 
 #### Visualizar uma conta
 
@@ -120,6 +122,8 @@ http://localhost:5035/v1/api/Accounts/
 
 ## Cobertura de testes
 
-Foi utilizada a biblioteca NUnit para auxiliar nos testes unitários, é uma ferramenta popular entre desenvolvedores para criar e executar testes automatizados, ajudando a garantir que o código funcione conforme o esperado.
+Foi utilizada as bibliotecas NUnit, Moq e AutoFixture para auxiliar nos testes unitários, são ferramentas populares entre desenvolvedores para criar e executar testes automatizados, ajudando a garantir que o código funcione conforme o esperado.
+
+O projeto possui 35 testes e todos foram executados com sucesso, a cobertura está em 100%.
 
 Na raiz do projeto pode-se utilizar o comando `dotnet test` para executar os testes.
