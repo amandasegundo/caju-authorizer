@@ -122,7 +122,7 @@ http://localhost:5035/v1/api/Accounts/
 
 ## Cobertura de testes
 
-Foi utilizada as bibliotecas NUnit, Moq e AutoFixture para auxiliar nos testes unitários, são ferramentas populares entre desenvolvedores para criar e executar testes automatizados, ajudando a garantir que o código funcione conforme o esperado.
+Foram utilizadas as bibliotecas NUnit, Moq e AutoFixture para auxiliar nos testes unitários, são ferramentas populares entre desenvolvedores para criar e executar testes automatizados, ajudando a garantir que o código funcione conforme o esperado.
 
 O projeto possui 35 testes e todos foram executados com sucesso, a cobertura está em 100%.
 
