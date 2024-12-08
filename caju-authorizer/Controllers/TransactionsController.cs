@@ -1,6 +1,7 @@
 ﻿using caju_authorizer_domain.Authorizer.Dtos;
 using caju_authorizer_domain.Authorizer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace caju_authorizer_api.Controllers
 {
@@ -16,7 +17,14 @@ namespace caju_authorizer_api.Controllers
     [FromBody] AuthorizerRequest authorizerRequest
     )
     {
+      Stopwatch stopwatch = new();
+      stopwatch.Start();
+
       var response = authorizerService.Authorize(authorizerRequest);
+
+      stopwatch.Stop();
+      Console.WriteLine($"Duração da execução: {stopwatch.ElapsedMilliseconds} ms");
+
       return Ok(response);
     }
   }

@@ -10,8 +10,8 @@ namespace caju_authorizer.Filters
   {
     public void OnException(ExceptionContext context)
     {
-      Console.WriteLine(context.Exception.Message);
-      Console.WriteLine(context.Exception.StackTrace);
+      Console.Error.WriteLine(context.Exception.Message);
+      Console.Error.WriteLine(context.Exception.StackTrace);
       context.Result = new OkObjectResult(new AuthorizerResponse
       {
         Code = ResponseCodes.Error.GetDescription()

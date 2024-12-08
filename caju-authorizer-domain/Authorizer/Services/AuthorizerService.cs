@@ -19,10 +19,16 @@ namespace caju_authorizer_domain.Authorizer.Services
   {
     public AuthorizerResponse Authorize(AuthorizerRequest authorizerRequest)
     {
+      Console.WriteLine($"Iniciando processamento para {JsonConvert.SerializeObject(authorizerRequest)}");
+
       var merchantName = MerchantHelper.NormalizeName(authorizerRequest.Merchant);
       var merchant = merchantRepository.GetMerchantByName(merchantName);
 
-      if (merchant is null) return ErrorResponse();
+      if (merchant is null)
+      {
+        Console.Error.WriteLine($"O Merchant não foi encontrado na base de dados");
+        return ErrorResponse();
+      }
 
       var transaction = new AuthorizerRequest()
       {
@@ -35,10 +41,17 @@ namespace caju_authorizer_domain.Authorizer.Services
       var key = TransactionHelper.GetTransactionCacheKey(transaction);
       var transactionFromCache = cacheRepository.Get(key);
 
-      if (transactionFromCache != null) return ErrorResponse();
+      if (transactionFromCache != null)
+      {
+        Console.Error.WriteLine($"Transação simultânea detectada, a transação não será processada");
+        return ErrorResponse();
+      }
 
       var responseCode = authorizerHandlerFactory.Create(transaction).Handle();
       cacheRepository.Set(key, JsonConvert.SerializeObject(transaction), transactionConfig.ExpirationTimeInMinutes);
+
+      Console.Error.WriteLine($"Processamento finalizado");
+
       return new AuthorizerResponse()
       {
         Code = responseCode

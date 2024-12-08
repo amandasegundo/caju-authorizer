@@ -15,6 +15,7 @@ namespace caju_authorizer_domain.Authorizer.Handlers
     {
       if (!HasSufficientBalance(account.MealBalance, authorizerRequest.TotalAmount))
       {
+        Console.Error.WriteLine("O saldo para Meal é insuficiente para esse valor, o valor do Cash será verificado");
         return Fallback(account);
       }
 
@@ -31,12 +32,17 @@ namespace caju_authorizer_domain.Authorizer.Handlers
 
       if (HasSufficientBalance(account.CashBalance, rest))
       {
+        Console.Error.WriteLine($"Foi descontado {account.MealBalance} no saldo de Meal e {rest} no saldo do Cash");
+
         var newCashBalance = CalculateNewBalance(account.CashBalance, rest);
         account.CashBalance = newCashBalance;
         account.MealBalance = 0;
         accountRepository.UpdateAccount(authorizerRequest.Account, account);
+
         return ResponseCodes.Approved.GetDescription();
       }
+
+      Console.Error.WriteLine("O valor do Cash também não foi suficiente");
 
       return ResponseCodes.Rejected.GetDescription();
     }

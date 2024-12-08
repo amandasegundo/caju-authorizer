@@ -15,6 +15,7 @@ namespace caju_authorizer_domain.Authorizer.Handlers
     {
       if (!HasSufficientBalance(account.CashBalance, authorizerRequest.TotalAmount))
       {
+        Console.Error.WriteLine("O saldo do Cash é insuficiente para esse valor");
         return ResponseCodes.Rejected.GetDescription();
       }
 
