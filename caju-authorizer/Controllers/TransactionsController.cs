@@ -10,12 +10,13 @@ namespace caju_authorizer_api.Controllers
   {
     [HttpPost]
     [Route("Authorize")]
+    [ProducesResponseType(typeof(AuthorizerResponse), 200)]
     public IActionResult Post(
     [FromServices] IAuthorizerService authorizerService,
-    [FromBody] AuthorizerRequest transaction
+    [FromBody] AuthorizerRequest authorizerRequest
     )
     {
-      var response = authorizerService.Authorize(transaction);
+      var response = authorizerService.Authorize(authorizerRequest);
       return Ok(response);
     }
   }
