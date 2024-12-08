@@ -6,7 +6,7 @@ A aplicação caju-authorizer é uma API REST que processa transações onde sã
 
 Foi utilizada a linguagem C# com o Framework .NET 8.0 que são tecnologias que a desenvolvedora mais tem contato atualmente.
 
-Este projeto faz parte do processo seletivo da empresa Caju e as especificações estão no neste [link](docs/caju-desafio-especificacoes.pdf).
+Este projeto faz parte do processo seletivo da empresa Caju e as especificações estão neste [link](docs/caju-desafio-especificacoes.pdf).
 
 ### Funcionalidades
 
@@ -122,7 +122,7 @@ http://localhost:5035/v1/api/Accounts/
 
 ## Cobertura de testes
 
-Foi utilizada as bibliotecas NUnit, Moq e AutoFixture para auxiliar nos testes unitários, são ferramentas populares entre desenvolvedores para criar e executar testes automatizados, ajudando a garantir que o código funcione conforme o esperado.
+Foram utilizadas as bibliotecas NUnit, Moq e AutoFixture para auxiliar nos testes unitários, são ferramentas populares entre desenvolvedores para criar e executar testes automatizados, ajudando a garantir que o código funcione conforme o esperado.
 
 O projeto possui 35 testes e todos foram executados com sucesso, a cobertura está em 100%.
 
